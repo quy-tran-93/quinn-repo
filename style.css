@@ -1,0 +1,14 @@
+table {
+  border-collapse: collapse;
+}
+
+th {
+  background: black;
+  color: white;
+  font-family: Arial;
+}
+
+td {
+  background: #f2f2f2;
+  font-family: Verdana;
+}
