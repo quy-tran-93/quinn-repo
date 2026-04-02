@@ -9,4 +9,3 @@ print("<html><body><h2>Contacts</h2><ul>")
 for line in lines:
     print(f"<li>{line}</li>")
 print("</ul></body></html>")
-
