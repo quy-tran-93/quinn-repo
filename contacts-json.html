@@ -11,9 +11,9 @@
 fetch('/cgi-bin/contacts-json.py')
   .then(res => res.json())
   .then(data => {
-    let html = "<tr><th>Name</th><th>Phone</th></tr>";
+    let html = "<tr><th>Name</th><th>Phone</th><th>email</th></tr>";
     data.data.forEach(c => {
-      html += `<tr><td>${c.name}</td><td>${c.telephone}</td></tr>`;
+      html += `<tr><td>${c.name}</td><td>${c.telephone}</td><td>${c.email}</td>/tr>`;
     });
     document.getElementById("tbl").innerHTML = html;
   });
