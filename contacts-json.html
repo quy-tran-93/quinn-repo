@@ -5,18 +5,56 @@
 <body>
 
 <h2>Contacts</h2>
+<button id="addDataBtn">Add Data</button>
 <table id="tbl" border="1"></table>
 
 <script>
-fetch('/cgi-bin/contacts-json.py')
-  .then(res => res.json())
-  .then(data => {
-    let html = "<tr><th>Name</th><th>Phone</th><th>email</th><tr>";
+document.addEventListener("DOMContentLoaded", function () {
+
+  // 1. Fetch data
+  fetch('/cgi-bin/contacts-json.py')
+  .then(res => res.text())
+  .then(text => {
+    console.log("RAW:", text);
+
+    const data = JSON.parse(text);
+
+    let html = "<tr><th>Name</th><th>Phone</th><th>Email</th></tr>";
+
     data.data.forEach(c => {
       html += `<tr><td>${c.name}</td><td>${c.telephone}</td><td>${c.email}</td><tr>`;
     });
+
     document.getElementById("tbl").innerHTML = html;
+  })
+  .catch(err => console.error(err));
+    .then(data => {
+      console.log(data);
+
+      let html = "<tr><th>Name</th><th>Phone</th><th>Email</th></tr>";
+
+      data.data.forEach(c => {
+        html += `<tr><td>${c.name}</td><td>${c.telephone}</td><td>${c.email}</td></tr>`;
+      });
+
+      document.getElementById("tbl").innerHTML = html;
+    })
+    .catch(err => {
+      console.error("Fetch error:", err);
+    });
+
+  // 2. Button click (tách riêng)
+  document.getElementById("addDataBtn").addEventListener("click", function () {
+    const table = document.getElementById("tbl");
+
+    const newRow = table.insertRow();
+
+    newRow.insertCell(0).innerText = "New User";
+    newRow.insertCell(1).innerText = "010-0000-0000";
+    newRow.insertCell(2).innerText = "new@email.com";
   });
+
+});
 </script>
 
 </body>
